@@ -4,206 +4,314 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Codice di Diritto Canonico</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#6b1d3a">
 <style>
-  :root {
-    --bg: #f9f6f2; --card: #ffffff; --primary: #7c1d3a; --primary-dark: #5a1429;
-    --text: #2c1e16; --muted: #7a6a5c; --border: #eee6dc; --nav-bg: #ffffff;
-  }
-  [data-theme="dark"] {
-    --bg: #1a1512; --card: #26201c; --primary: #c45c7a; --primary-dark: #a84868;
-    --text: #f5efe8; --muted: #b8a898; --border: #3a322c; --nav-bg: #221c18;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); padding-bottom: 70px; line-height: 1.5; }
-  header { background: linear-gradient(160deg, var(--primary), var(--primary-dark)); color: white; padding: 1.3rem 1rem; text-align: center; position: sticky; top: 0; z-index: 100; }
-  header h1 { font-size: 1.35rem; font-weight: 700; }
-  header .subtitle { font-size: 0.8rem; opacity: 0.85; margin-top: 0.3rem; }
-  .theme-toggle { position: absolute; top: 0.9rem; right: 1rem; background: rgba(255,255,255,0.15); border: none; color: white; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; }
-  .view { display: none; } .view.active { display: block; }
-  .container { max-width: 680px; margin: 0 auto; padding: 0.8rem; }
-  .book { background: var(--card); border-radius: 14px; margin-bottom: 0.7rem; border: 1px solid var(--border); overflow: hidden; }
-  .book-header { padding: 0.9rem 1rem; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #faf7f2; }
-  [data-theme="dark"] .book-header { background: #2e2722; }
-  .book-header span:first-child { color: var(--primary); }
-  .book-body { padding: 0.4rem 0.6rem 0.8rem; display: none; }
-  .book.open .book-body { display: block; }
-  .title-item, .chapter-item, .article-item { padding: 0.45rem 0.6rem; margin: 0.2rem 0; border-radius: 8px; font-size: 0.92rem; }
-  .title-item { font-weight: 500; cursor: pointer; }
-  .title-item:hover { background: rgba(124, 29, 58, 0.06); }
-  .chapter-item { margin-left: 1rem; color: var(--muted); font-size: 0.88rem; }
-  .article-item { margin-left: 1.8rem; color: var(--muted); font-size: 0.84rem; }
-  .search-box { padding: 0.8rem; }
-  .search-box input { width: 100%; padding: 0.9rem 1rem; border-radius: 12px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
-  .section-header {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--primary);
-    text-align: center;
-    margin: 0.5rem 0 1rem;
-    padding: 0 0.5rem;
-  }
-  .canon-card { background: var(--card); border-radius: 14px; margin-bottom: 0.7rem; border: 1px solid var(--border); overflow: hidden; }
-  .canon-header { padding: 0.95rem 1.1rem; display: flex; justify-content: space-between; cursor: pointer; }
-  .canon-number { font-weight: 700; color: var(--primary); }
-  .canon-body { max-height: 0; overflow: hidden; transition: 0.35s; }
-  .canon-card.open .canon-body { max-height: 1200px; padding: 0 1.1rem 1rem; }
-  .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: var(--nav-bg); border-top: 1px solid var(--border); display: flex; justify-content: space-around; padding: 0.5rem 0 0.65rem; z-index: 200; }
-  .nav-item { text-align: center; font-size: 0.68rem; color: var(--muted); cursor: pointer; }
-  .nav-item.active { color: var(--primary); font-weight: 600; }
-  .nav-item span { display: block; font-size: 1.3rem; }
-  .loading { text-align: center; padding: 2rem; color: var(--muted); }
+:root {
+  --primary: #6b1d3a;
+  --bg: #faf8f5;
+  --card: #ffffff;
+  --text: #2c2c2c;
+  --border: #e8e0d8;
+  --header-height: 70px;
+  --nav-height: 60px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding-bottom: var(--nav-height);
+}
+header {
+  position: sticky;
+  top: 0;
+  background: var(--primary);
+  color: white;
+  padding: 12px 16px;
+  text-align: center;
+  z-index: 100;
+}
+header h1 { font-size: 18px; font-weight: 600; }
+header p { font-size: 12px; opacity: 0.9; margin-top: 2px; }
+.search-box {
+  padding: 12px 16px;
+  background: var(--bg);
+  position: sticky;
+  top: 56px;
+  z-index: 90;
+}
+.search-box input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  font-size: 16px;
+  background: white;
+}
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+  padding: 8px 16px 12px;
+  justify-content: center;
+  background: var(--bg);
+}
+.lang-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  background: white;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.lang-btn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+.section-header {
+  text-align: center;
+  padding: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  font-size: 15px;
+}
+.canon-card {
+  background: var(--card);
+  margin: 8px 16px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.canon-header {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--primary);
+}
+.canon-body {
+  padding: 0 16px 16px;
+  display: none;
+  line-height: 1.5;
+}
+.canon-card.open .canon-body { display: block; }
+.latin-text {
+  display: none;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #eee;
+  font-style: italic;
+  color: #555;
+  font-size: 14px;
+}
+.latin-toggle {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.bookmark-btn {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #ccc;
+  margin-left: 8px;
+}
+.bookmark-btn.active { color: #f4b400; }
+nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: white;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+nav button {
+  background: none;
+  border: none;
+  font-size: 11px;
+  color: #888;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+nav button.active { color: var(--primary); }
+#content { min-height: calc(100vh - 130px); }
 </style>
 </head>
 <body>
+
 <header>
-  <button class="theme-toggle" id="themeBtn">🌙</button>
   <h1>Codice di Diritto Canonico</h1>
-  <div class="subtitle">Indice e Canoni</div>
+  <p>Indice e Canoni</p>
 </header>
 
-<div class="view active" id="view-contents">
-  <div class="container">
-    <div class="book open">
-      <div class="book-header" onclick="this.parentElement.classList.toggle('open')">
-        <span>Libro I. Norme generali (Cann. 1–203)</span><span>▼</span>
-      </div>
-      <div class="book-body">
-        <div class="title-item" data-from="1" data-to="6">Canoni preliminari (1–6)</div>
-        <div class="title-item" data-from="7" data-to="22">Titolo I. Le leggi ecclesiastiche (7–22)</div>
-        <div class="title-item" data-from="23" data-to="28">Titolo II. La consuetudine (23–28)</div>
-        <div class="title-item" data-from="29" data-to="34">Titolo III. I decreti generali e le istruzioni (29–34)</div>
-        <div class="title-item" data-from="35" data-to="93">Titolo IV. Gli atti amministrativi singolari (35–93)</div>
-        <div class="title-item" data-from="94" data-to="95">Titolo V. Gli statuti e i regolamenti (94–95)</div>
-        <div class="title-item" data-from="96" data-to="123">Titolo VI. Le persone fisiche e giuridiche (96–123)</div>
-        <div class="title-item" data-from="124" data-to="128">Titolo VII. Gli atti giuridici (124–128)</div>
-        <div class="title-item" data-from="129" data-to="144">Titolo VIII. La potestà di governo (129–144)</div>
-        <div class="title-item" data-from="145" data-to="196">Titolo IX. Gli uffici ecclesiastici (145–196)</div>
-        <div class="title-item" data-from="197" data-to="199">Titolo X. La prescrizione (197–199)</div>
-        <div class="title-item" data-from="200" data-to="203">Titolo XI. Il computo del tempo (200–203)</div>
-      </div>
-    </div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro II. Il popolo di Dio</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro III. La funzione d'insegnare della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro IV. La funzione di santificare della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro V. I beni temporali della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro VI. Le sanzioni nella Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro VII. I processi</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
-  </div>
+<div class="search-box">
+  <input type="text" id="search" placeholder="Cerca canone..." oninput="filterCanons()">
 </div>
 
-<div class="view" id="view-canons">
-  <div class="search-box"><input type="text" id="search" placeholder="Cerca canone..."></div>
-  <div class="container" id="canons"></div>
+<div class="lang-switcher">
+  <button class="lang-btn active" data-lang="it">Italiano</button>
+  <button class="lang-btn" data-lang="la">Latina</button>
+  <button class="lang-btn" data-lang="uk">Українська</button>
 </div>
 
-<nav class="bottom-nav">
-  <div class="nav-item active" data-view="contents"><span>📖</span>Indice</div>
-  <div class="nav-item" data-view="canons"><span>📜</span>Canoni</div>
-  <div class="nav-item"><span>🔖</span>Segnalibri</div>
-  <div class="nav-item"><span>⚙️</span>Impostazioni</div>
+<div id="content"></div>
+
+<nav>
+  <button onclick="showIndice()" class="active">Indice</button>
+  <button onclick="showCanoni()">Canoni</button>
+  <button onclick="showBookmarks()">Segnalibri</button>
 </nav>
 
 <script>
 let allCanons = [];
-let currentFilter = { from: 1, to: 203, title: "" };
-let dataLoaded = false;
+let currentLang = 'it';
+let bookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+let currentFilter = { from: null, to: null, title: null };
 
-async function loadBook(book = 1) {
-  if (dataLoaded) return;
-  const container = document.getElementById('canons');
-  container.innerHTML = '<div class="loading">Caricamento dei canoni...</div>';
+async function loadData() {
   try {
-    const res = await fetch(`data/libro${book}.json`);
-    if (!res.ok) throw new Error('File non trovato');
+    const res = await fetch('data/libro1.json');
     allCanons = await res.json();
-    dataLoaded = true;
-    renderCanons();
+    showIndice();
   } catch (e) {
-    container.innerHTML = `<div class="loading">Errore nel caricamento dei dati.<br>Assicurati che il file data/libro${book}.json esista.</div>`;
-    console.error(e);
+    document.getElementById('content').innerHTML = '<p style="text-align:center;padding:40px;">Errore nel caricamento dei dati.</p>';
   }
 }
 
-function renderCanons(filterText = "") {
-  const container = document.getElementById('canons');
-  if (!dataLoaded) return;
-  container.innerHTML = "";
-
-  // Заголовок титулу
-  if (currentFilter.title) {
-    const header = document.createElement('div');
-    header.className = 'section-header';
-    header.textContent = currentFilter.title;
-    container.appendChild(header);
-  }
-
-  const f = filterText.toLowerCase().trim();
-  allCanons.forEach(c => {
-    if (c.num < currentFilter.from || c.num > currentFilter.to) return;
-    if (f && !String(c.num).includes(f) && !c.text.toLowerCase().includes(f)) return;
-    const card = document.createElement('div');
-    card.className = 'canon-card';
-    card.innerHTML = `
-      <div class="canon-header">
-        <div><div class="canon-number">Can. ${c.num}</div></div>
-        <div>▼</div>
-      </div>
-      <div class="canon-body"><p>${c.text}</p></div>`;
-    card.querySelector('.canon-header').onclick = () => card.classList.toggle('open');
-    container.appendChild(card);
-  });
-
-  if (container.children.length <= (currentFilter.title ? 1 : 0)) {
-    container.innerHTML += '<div class="loading">Nessun canone trovato in questo intervallo.</div>';
-  }
+function showIndice() {
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelector('nav button:nth-child(1)').classList.add('active');
+  document.getElementById('content').innerHTML = `
+    <div style="padding:20px;text-align:center;">
+      <h2 style="color:var(--primary);margin-bottom:20px;">Libro I — Norme generali</h2>
+      <div onclick="showSection(7,22,'Titolo I. Le leggi ecclesiastiche (7–22)')" style="padding:14px;background:white;margin:8px 0;border-radius:10px;cursor:pointer;">Titolo I. Le leggi ecclesiastiche (7–22)</div>
+      <div onclick="showSection(23,28,'Titolo II. La consuetudine (23–28)')" style="padding:14px;background:white;margin:8px 0;border-radius:10px;cursor:pointer;">Titolo II. La consuetudine (23–28)</div>
+      <!-- Додай інші титули за потреби -->
+    </div>
+  `;
 }
 
 function showSection(from, to, title) {
   currentFilter = { from, to, title };
-  showView('canons');
-  document.getElementById('search').value = "";
-  if (!dataLoaded) loadBook(1);
-  else renderCanons();
+  showCanoni();
 }
 
-function showView(view) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('view-' + view).classList.add('active');
-  const nav = document.querySelector(`[data-view="${view}"]`);
-  if (nav) nav.classList.add('active');
-  if (view === 'canons' && !dataLoaded) loadBook(1);
-  if (view === 'canons' && dataLoaded) renderCanons();
+function showCanoni() {
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelector('nav button:nth-child(2)').classList.add('active');
+  renderCanons(getFilteredCanons());
 }
 
-// Кліки по титулах
-document.querySelectorAll('.title-item[data-from]').forEach(item => {
-  item.onclick = () => {
-    const from = parseInt(item.dataset.from);
-    const to = parseInt(item.dataset.to);
-    const title = item.textContent.trim();
-    showSection(from, to, title);
-  };
-});
+function showBookmarks() {
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.querySelector('nav button:nth-child(3)').classList.add('active');
+  const list = allCanons.filter(c => bookmarks.includes(c.num));
+  currentFilter = { from: null, to: null, title: 'Segnalibri' };
+  renderCanons(list);
+}
 
-document.querySelectorAll('.nav-item[data-view]').forEach(item => {
-  item.onclick = () => {
-    if (item.dataset.view === 'canons') {
-      currentFilter = { from: 1, to: 203, title: "Libro I. Norme generali" };
+function getFilteredCanons() {
+  let list = allCanons;
+  if (currentFilter.from && currentFilter.to) {
+    list = list.filter(c => c.num >= currentFilter.from && c.num <= currentFilter.to);
+  }
+  const q = document.getElementById('search').value.toLowerCase();
+  if (q) {
+    list = list.filter(c => 
+      c.num.toString().includes(q) || 
+      (c[currentLang] || c.it || '').toLowerCase().includes(q)
+    );
+  }
+  return list;
+}
+
+function renderCanons(list) {
+  const container = document.getElementById('content');
+  container.innerHTML = '';
+
+  if (currentFilter.title) {
+    const h = document.createElement('div');
+    h.className = 'section-header';
+    h.textContent = currentFilter.title;
+    container.appendChild(h);
+  }
+
+  list.forEach(canon => {
+    const card = document.createElement('div');
+    card.className = 'canon-card';
+    const isBookmarked = bookmarks.includes(canon.num);
+
+    card.innerHTML = `
+      <div class="canon-header" onclick="this.parentElement.classList.toggle('open')">
+        <span>Can. ${canon.num}</span>
+        <button class="bookmark-btn ${isBookmarked ? 'active' : ''}" onclick="event.stopPropagation(); toggleBookmark(${canon.num}, this)">★</button>
+        <button class="latin-toggle" onclick="event.stopPropagation(); toggleLatin(this)">+ Lat</button>
+      </div>
+      <div class="canon-body">
+        <div>${canon[currentLang] || canon.it || ''}</div>
+        <div class="latin-text"><strong>Latine:</strong><br>${canon.la || ''}</div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function toggleLatin(btn) {
+  const latin = btn.closest('.canon-card').querySelector('.latin-text');
+  const isHidden = latin.style.display !== 'block';
+  latin.style.display = isHidden ? 'block' : 'none';
+  btn.textContent = isHidden ? '− Lat' : '+ Lat';
+}
+
+function toggleBookmark(num, btn) {
+  const i = bookmarks.indexOf(num);
+  if (i > -1) {
+    bookmarks.splice(i, 1);
+    btn.classList.remove('active');
+  } else {
+    bookmarks.push(num);
+    btn.classList.add('active');
+  }
+  localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+}
+
+function filterCanons() {
+  if (document.querySelector('nav button.active').textContent.includes('Canoni') || 
+      document.querySelector('nav button.active').textContent.includes('Segnalibri')) {
+    renderCanons(getFilteredCanons());
+  }
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentLang = btn.dataset.lang;
+    if (document.getElementById('content').querySelector('.canon-card')) {
+      renderCanons(getFilteredCanons());
     }
-    showView(item.dataset.view);
   };
 });
 
-document.getElementById('search').oninput = e => renderCanons(e.target.value);
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
 
-document.getElementById('themeBtn').onclick = () => {
-  const html = document.documentElement;
-  const isDark = html.getAttribute('data-theme') === 'dark';
-  html.setAttribute('data-theme', isDark ? '' : 'dark');
-  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
-};
+loadData();
 </script>
 </body>
 </html>
