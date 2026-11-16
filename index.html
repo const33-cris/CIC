@@ -35,6 +35,14 @@
   .article-item { margin-left: 1.8rem; color: var(--muted); font-size: 0.84rem; }
   .search-box { padding: 0.8rem; }
   .search-box input { width: 100%; padding: 0.9rem 1rem; border-radius: 12px; border: 1.5px solid var(--border); background: var(--card); color: var(--text); }
+  .section-header {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    margin: 0.5rem 0 1rem;
+    padding: 0 0.5rem;
+  }
   .canon-card { background: var(--card); border-radius: 14px; margin-bottom: 0.7rem; border: 1px solid var(--border); overflow: hidden; }
   .canon-header { padding: 0.95rem 1.1rem; display: flex; justify-content: space-between; cursor: pointer; }
   .canon-number { font-weight: 700; color: var(--primary); }
@@ -86,7 +94,7 @@
 
 <div class="view" id="view-canons">
   <div class="search-box"><input type="text" id="search" placeholder="Cerca canone..."></div>
-  <div class="container" id="canons"><div class="loading">Caricamento...</div></div>
+  <div class="container" id="canons"></div>
 </div>
 
 <nav class="bottom-nav">
@@ -98,7 +106,7 @@
 
 <script>
 let allCanons = [];
-let currentFilter = { from: 1, to: 203 };
+let currentFilter = { from: 1, to: 203, title: "" };
 let dataLoaded = false;
 
 async function loadBook(book = 1) {
@@ -121,6 +129,15 @@ function renderCanons(filterText = "") {
   const container = document.getElementById('canons');
   if (!dataLoaded) return;
   container.innerHTML = "";
+
+  // Заголовок титулу
+  if (currentFilter.title) {
+    const header = document.createElement('div');
+    header.className = 'section-header';
+    header.textContent = currentFilter.title;
+    container.appendChild(header);
+  }
+
   const f = filterText.toLowerCase().trim();
   allCanons.forEach(c => {
     if (c.num < currentFilter.from || c.num > currentFilter.to) return;
@@ -136,13 +153,14 @@ function renderCanons(filterText = "") {
     card.querySelector('.canon-header').onclick = () => card.classList.toggle('open');
     container.appendChild(card);
   });
-  if (container.children.length === 0) {
-    container.innerHTML = '<div class="loading">Nessun canone trovato in questo intervallo.</div>';
+
+  if (container.children.length <= (currentFilter.title ? 1 : 0)) {
+    container.innerHTML += '<div class="loading">Nessun canone trovato in questo intervallo.</div>';
   }
 }
 
-function showSection(from, to) {
-  currentFilter = { from, to };
+function showSection(from, to, title) {
+  currentFilter = { from, to, title };
   showView('canons');
   document.getElementById('search').value = "";
   if (!dataLoaded) loadBook(1);
@@ -164,13 +182,16 @@ document.querySelectorAll('.title-item[data-from]').forEach(item => {
   item.onclick = () => {
     const from = parseInt(item.dataset.from);
     const to = parseInt(item.dataset.to);
-    showSection(from, to);
+    const title = item.textContent.trim();
+    showSection(from, to, title);
   };
 });
 
 document.querySelectorAll('.nav-item[data-view]').forEach(item => {
   item.onclick = () => {
-    if (item.dataset.view === 'canons') currentFilter = { from: 1, to: 203 };
+    if (item.dataset.view === 'canons') {
+      currentFilter = { from: 1, to: 203, title: "Libro I. Norme generali" };
+    }
     showView(item.dataset.view);
   };
 });
