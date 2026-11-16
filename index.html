@@ -44,14 +44,14 @@
   .nav-item { text-align: center; font-size: 0.68rem; color: var(--muted); cursor: pointer; }
   .nav-item.active { color: var(--primary); font-weight: 600; }
   .nav-item span { display: block; font-size: 1.3rem; }
-  .section-title { font-weight: 600; color: var(--primary); margin: 1rem 0 0.5rem; font-size: 1.05rem; }
+  .loading { text-align: center; padding: 2rem; color: var(--muted); }
 </style>
 </head>
 <body>
 <header>
   <button class="theme-toggle" id="themeBtn">🌙</button>
   <h1>Codice di Diritto Canonico</h1>
-  <div class="subtitle">Libro I – Norme generali</div>
+  <div class="subtitle">Indice e Canoni</div>
 </header>
 
 <div class="view active" id="view-contents">
@@ -61,50 +61,32 @@
         <span>Libro I. Norme generali (Cann. 1–203)</span><span>▼</span>
       </div>
       <div class="book-body">
-        <div class="title-item" onclick="showSection(1,6)">Canoni preliminari (1–6)</div>
-        <div class="title-item" onclick="showSection(7,22)">Titolo I. Le leggi ecclesiastiche (7–22)</div>
-        <div class="title-item" onclick="showSection(23,28)">Titolo II. La consuetudine (23–28)</div>
-        <div class="title-item" onclick="showSection(29,34)">Titolo III. I decreti generali e le istruzioni (29–34)</div>
-        <div class="title-item">Titolo IV. Gli atti amministrativi singolari (35–93)</div>
-        <div class="chapter-item">Capitolo I. Norme comuni (35–47)</div>
-        <div class="chapter-item">Capitolo II. I decreti e i precetti singolari (48–58)</div>
-        <div class="chapter-item">Capitolo III. I rescritti (59–75)</div>
-        <div class="chapter-item">Capitolo IV. I privilegi (76–84)</div>
-        <div class="chapter-item">Capitolo V. Le dispense (85–93)</div>
-        <div class="title-item">Titolo V. Gli statuti e i regolamenti (94–95)</div>
-        <div class="title-item">Titolo VI. Le persone fisiche e giuridiche (96–123)</div>
-        <div class="chapter-item">Capitolo I. La condizione canonica delle persone fisiche (96–112)</div>
-        <div class="chapter-item">Capitolo II. Le persone giuridiche (113–123)</div>
-        <div class="title-item">Titolo VII. Gli atti giuridici (124–128)</div>
-        <div class="title-item">Titolo VIII. La potestà di governo (129–144)</div>
-        <div class="title-item">Titolo IX. Gli uffici ecclesiastici (145–196)</div>
-        <div class="chapter-item">Capitolo I. Provvisione dell'ufficio ecclesiastico</div>
-        <div class="article-item">Art. 1. Il libero conferimento</div>
-        <div class="article-item">Art. 2. La presentazione</div>
-        <div class="article-item">Art. 3. L'elezione</div>
-        <div class="article-item">Art. 4. La postulazione</div>
-        <div class="chapter-item">Capitolo II. La perdita dell'ufficio ecclesiastico</div>
-        <div class="article-item">Art. 1. La rinuncia</div>
-        <div class="article-item">Art. 2. Il trasferimento</div>
-        <div class="article-item">Art. 3. La rimozione</div>
-        <div class="article-item">Art. 4. La privazione</div>
-        <div class="title-item">Titolo X. La prescrizione (197–199)</div>
-        <div class="title-item">Titolo XI. Il computo del tempo (200–203)</div>
+        <div class="title-item" data-from="1" data-to="6">Canoni preliminari (1–6)</div>
+        <div class="title-item" data-from="7" data-to="22">Titolo I. Le leggi ecclesiastiche (7–22)</div>
+        <div class="title-item" data-from="23" data-to="28">Titolo II. La consuetudine (23–28)</div>
+        <div class="title-item" data-from="29" data-to="34">Titolo III. I decreti generali e le istruzioni (29–34)</div>
+        <div class="title-item" data-from="35" data-to="93">Titolo IV. Gli atti amministrativi singolari (35–93)</div>
+        <div class="title-item" data-from="94" data-to="95">Titolo V. Gli statuti e i regolamenti (94–95)</div>
+        <div class="title-item" data-from="96" data-to="123">Titolo VI. Le persone fisiche e giuridiche (96–123)</div>
+        <div class="title-item" data-from="124" data-to="128">Titolo VII. Gli atti giuridici (124–128)</div>
+        <div class="title-item" data-from="129" data-to="144">Titolo VIII. La potestà di governo (129–144)</div>
+        <div class="title-item" data-from="145" data-to="196">Titolo IX. Gli uffici ecclesiastici (145–196)</div>
+        <div class="title-item" data-from="197" data-to="199">Titolo X. La prescrizione (197–199)</div>
+        <div class="title-item" data-from="200" data-to="203">Titolo XI. Il computo del tempo (200–203)</div>
       </div>
     </div>
-    <!-- Інші книги залишаються як раніше (скорочено) -->
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro II. Il popolo di Dio</span><span>▼</span></div><div class="book-body"><div class="title-item">Parte I. I fedeli</div><div class="title-item">Parte II. La costituzione gerarchica della Chiesa</div><div class="title-item">Parte III. Gli istituti di vita consacrata</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro III. La funzione d'insegnare della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">Titolo I. Il ministero della parola divina</div><div class="title-item">Titolo II. L'azione missionaria della Chiesa</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro IV. La funzione di santificare della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">Parte I. I sacramenti</div><div class="title-item">Parte II. Gli altri atti del culto divino</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro V. I beni temporali della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">Titolo I. L'acquisizione dei beni</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro VI. Le sanzioni nella Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">Parte I. I delitti e le pene in generale</div></div></div>
-    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro VII. I processi</span><span>▼</span></div><div class="book-body"><div class="title-item">Parte I. I giudizi in generale</div></div></div>
+    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro II. Il popolo di Dio</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
+    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro III. La funzione d'insegnare della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
+    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro IV. La funzione di santificare della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
+    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro V. I beni temporali della Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
+    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro VI. Le sanzioni nella Chiesa</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
+    <div class="book"><div class="book-header" onclick="this.parentElement.classList.toggle('open')"><span>Libro VII. I processi</span><span>▼</span></div><div class="book-body"><div class="title-item">In preparazione</div></div></div>
   </div>
 </div>
 
 <div class="view" id="view-canons">
   <div class="search-box"><input type="text" id="search" placeholder="Cerca canone..."></div>
-  <div class="container" id="canons"></div>
+  <div class="container" id="canons"><div class="loading">Caricamento...</div></div>
 </div>
 
 <nav class="bottom-nav">
@@ -115,56 +97,34 @@
 </nav>
 
 <script>
-const allCanons = [
-  // Canoni 1-6
-  { num: 1, text: "I canoni di questo Codice riguardano la sola Chiesa latina." },
-  { num: 2, text: "Il Codice il più delle volte non definisce i riti, che sono da osservarsi nel celebrare le azioni liturgiche; di conseguenza le leggi liturgiche finora vigenti mantengono il loro vigore, a meno che qualcuna di esse non sia contraria ai canoni del Codice." },
-  { num: 3, text: "I canoni del Codice non abrogano le convenzioni stipulate dalla Sede Apostolica con le nazioni o con le altre società politiche né ad esse derogano; le medesime perciò continuano ad essere in vigore come al presente, non opponendosi in alcun modo le disposizioni contrarie di questo Codice." },
-  { num: 4, text: "I diritti acquisiti, e parimenti i privilegi che, concessi dalla Sede Apostolica fino al presente alle persone sia fisiche sia giuridiche, sono in uso e non revocati, permangono integri, a meno che non siano espressamente revocati dai canoni di questo Codice." },
-  { num: 5, text: "§1. Le consuetudini sia universali sia particolari vigenti al presente contro le disposizioni di questi canoni, che sono riprovate dagli stessi canoni di questo Codice, sono soppresse del tutto, né siano lasciate rivivere in futuro; anche le rimanenti si ritengano soppresse, a meno che non sia disposto espressamente altro dal Codice oppure siano centenarie o immemorabili; queste appunto, se a giudizio dell'Ordinario non possono essere rimosse a causa di circostanze di luoghi e di persone, possono essere tollerate.<br>§2. Le consuetudini fuori del diritto finora vigenti, sia universali sia particolari, sono conservate." },
-  { num: 6, text: "§1. Entrando in vigore questo Codice, sono abrogati: 1° il Codice di Diritto Canonico promulgato nell'anno 1917; 2° anche le altre leggi, sia universali sia particolari, contrarie alle disposizioni di questo Codice, a meno che non sia disposto espressamente altro circa quelle particolari; 3° qualsiasi legge penale, sia universale sia particolare emanata dalla Sede Apostolica, a meno che non sia ripresa in questo stesso Codice; 4° così pure tutte le altre leggi disciplinari universali riguardanti materia che viene ordinata integralmente da questo Codice.<br>§2. I canoni di questo Codice, nella misura in cui riportano il diritto antico, sono da valutarsi tenuto conto anche della tradizione canonica." },
-  // Canoni 7-22 (як раніше)
-  { num: 7, text: "La legge è istituita quando è promulgata." },
-  { num: 8, text: "§1. Le leggi ecclesiastiche universali sono promulgate con l'edizione nella <em>gazzetta ufficiale degli Acta Apostolicae Sedis</em>, a meno che in casi particolari non sia stato stabilito un modo diverso di promulgare; ed entrano in vigore soltanto compiuti tre mesi dal giorno apposto al numero degli <em>Acta</em>, a meno che non obblighino immediatamente per la natura delle cose oppure nella stessa legge sia stata stabilita in modo speciale ed espressamente una più breve o una più lunga vacanza.<br>§2. Le leggi particolari sono promulgate nel modo determinato dal legislatore e cominciano a obbligare dopo un mese dal giorno della promulgazione, a meno che nella stessa legge non sia stabilito un termine diverso." },
-  { num: 9, text: "Le leggi riguardano le cose future, non le cose passate, a meno che non si disponga nominatamente in esse delle cose passate." },
-  { num: 10, text: "Sono da ritenersi irritanti o inabilitanti solo quelle leggi con le quali si stabilisce espressamente che l'atto è nullo o la persona è inabile." },
-  { num: 11, text: "Alle leggi puramente ecclesiastiche sono tenuti i battezzati nella Chiesa cattolica o in essa accolti, e che godono di sufficiente uso di ragione e, a meno che non sia disposto espressamente altro dal diritto, hanno compiuto il settimo anno di età." },
-  { num: 12, text: "§1. Alle leggi universali sono tenuti dovunque tutti coloro per i quali sono state date.<br>§2. Dalle leggi universali invece, che non sono in vigore in un determinato territorio, sono esenti tutti quelli che si trovano attualmente in tale territorio.<br>§3. Alle leggi fatte per un territorio peculiare sono sottoposti coloro per i quali sono state date e che in esso hanno il domicilio o il quasi-domicilio e insieme attualmente vi dimorano, fermo restando il disposto del can. 13." },
-  { num: 13, text: "§1. Le leggi particolari non si presumono personali, ma territoriali, se non consta altrimenti.<br>§2. I forestieri non sono obbligati: 1) alle leggi particolari del loro territorio fino a quando ne sono assenti, a meno che o la loro trasgressione rechi danno nel proprio territorio, o le leggi siano personali; 2) e neppure alle leggi del territorio in cui si trovano, eccetto quelle che provvedono all'ordine pubblico, o determinano le formalità degli atti, o riguardano gli immobili situati nel territorio.<br>§3. I girovaghi sono obbligati alle leggi, sia universali sia particolari, che sono in vigore nel luogo in cui si trovano." },
-  { num: 14, text: "Le leggi, anche irritanti o inabilitanti, nel dubbio di diritto non urgono; nel dubbio di fatto invece gli Ordinari possono dispensare da esse, purché, se si tratta di dispensa riservata, venga solitamente concessa dall'autorità cui è riservata." },
-  { num: 15, text: "§1. L'ignoranza o l'errore circa le leggi irritanti e inabilitanti non impediscono l'effetto delle medesime, a meno che non sia stabilito espressamente altro.<br>§2. L'ignoranza o l'errore circa la legge o la pena oppure su un fatto personale o intorno a un fatto notorio di altri non si presumono; circa un fatto non notorio di altri si presumono, finché non si provi il contrario." },
-  { num: 16, text: "§1. Interpreta autenticamente le leggi il legislatore e colui al quale egli abbia concesso la potestà d'interpretarle autenticamente.<br>§2. L'interpretazione autentica presentata a modo di legge ha la medesima forza della legge stessa e deve essere promulgata; e se soltanto dichiara le parole di per sé certe della legge, ha valore retroattivo; se restringe o estende la legge oppure chiarisce quella dubbia, non è retroattiva.<br>§3. L'interpretazione invece a modo di sentenza giudiziale o di atto amministrativo in cosa peculiare, non ha forza di legge e obbliga soltanto le persone e dispone delle cose per cui è stata data." },
-  { num: 17, text: "Le leggi ecclesiastiche sono da intendersi secondo il significato proprio delle parole considerato nel testo e nel contesto; che se rimanessero dubbie e oscure, si deve ricorrere ai luoghi paralleli, se ce ne sono, al fine e alle circostanze della legge e all'intendimento del legislatore." },
-  { num: 18, text: "Le leggi che stabiliscono una pena, o che restringono il libero esercizio dei diritti, o che contengono un'eccezione alla legge, sono sottoposte a interpretazione stretta." },
-  { num: 19, text: "Se su una determinata materia manca una espressa disposizione di legge sia universale sia particolare o una consuetudine, la causa, se non è penale, è da dirimersi tenute presenti le leggi date per casi simili, i principi generali del diritto applicati con equità canonica, la giurisprudenza e la prassi della Curia Romana, il modo di sentire comune e costante dei giuristi." },
-  { num: 20, text: "La legge posteriore abroga la precedente o deroga alla medesima, se lo indica espressamente, o è direttamente contraria a quella, oppure riordina integralmente tutta quanta la materia della legge precedente; la legge universale però non deroga affatto al diritto particolare o speciale, a meno che non sia disposto espressamente altro dal diritto." },
-  { num: 21, text: "Nel dubbio la revoca della legge preesistente non si presume, ma le leggi posteriori devono essere ricondotte alle precedenti e con queste conciliate, per quanto è possibile." },
-  { num: 22, text: "Le leggi civili alle quali il diritto della Chiesa rimanda, vengano osservate nel diritto canonico con i medesimi effetti, in quanto non siano contrarie al diritto divino e se il diritto canonico non dispone altrimenti." },
-  // Canoni 23-28
-  { num: 23, text: "Ha forza di legge soltanto quella consuetudine, introdotta dalla comunità dei fedeli, che sia stata approvata dal legislatore, a norma dei canoni che seguono." },
-  { num: 24, text: "§1. Nessuna consuetudine, che sia contraria al diritto divino, può ottenere forza di legge.<br>§2. Né può ottenere forza di legge la consuetudine contro o fuori del diritto canonico, che non sia razionale; ora la consuetudine che è espressamente riprovata nel diritto, non è razionale." },
-  { num: 25, text: "Nessuna consuetudine ottiene forza di legge, se non sarà stata osservata da una comunità capace almeno di ricevere una legge, con l'intenzione di introdurre un diritto." },
-  { num: 26, text: "A meno che non sia stata approvata in modo speciale dal legislatore competente, una consuetudine contraria al diritto canonico vigente o che è al di fuori della legge canonica, ottiene forza di legge soltanto se sarà stata osservata legittimamente per trenta anni continui e completi; ma contro una legge canonica che contenga la clausola che proibisce le consuetudini future, può prevalere la sola consuetudine centenaria o immemorabile." },
-  { num: 27, text: "La consuetudine è ottima interprete delle leggi." },
-  { num: 28, text: "Fermo restando il disposto del can. 5, la consuetudine, sia contro sia al di fuori della legge, è revocata per mezzo di una consuetudine o di una legge contraria; ma, se non se ne fa espressa menzione, la legge non revoca le consuetudini centenarie o immemorabili, né la legge universale revoca le consuetudini particolari." },
-  // Canoni 29-34
-  { num: 29, text: "I decreti generali, con i quali dal legislatore competente vengono date disposizioni comuni per una comunità capace di ricevere una legge, sono propriamente leggi e sono retti dalle disposizioni dei canoni sulle leggi." },
-  { num: 30, text: "Chi gode soltanto della potestà esecutiva non può validamente emanare il decreto generale, di cui al can. 29, a meno che in casi particolari a norma del diritto ciò non gli sia stato espressamente concesso dal legislatore competente, e adempiute le condizioni stabilite nell'atto della concessione." },
-  { num: 31, text: "§1. Possono dare i decreti generali esecutivi, con cui sono appunto determinati più precisamente i modi da osservarsi nell'applicare la legge o con cui si urge l'osservanza delle leggi, coloro che godono della potestà esecutiva, entro i limiti della loro competenza.<br>§2. Per ciò che attiene alla promulgazione e alla vacanza dei decreti di cui al §1, si osservino le disposizioni del can. 8." },
-  { num: 32, text: "I decreti generali esecutivi obbligano coloro che sono tenuti alle leggi delle quali i decreti stessi determinano i modi di applicazione o urgono l'osservanza." },
-  { num: 33, text: "§1. I decreti generali esecutivi, anche se sono pubblicati nei direttori o in documenti di altro nome, non derogano alle leggi, e le loro disposizioni che siano contrarie alle leggi, sono prive di ogni vigore.<br>§2. I medesimi decreti cessano d'avere vigore per revoca esplicita o implicita fatta dall'autorità competente, e altresì cessando la legge per la cui esecuzione furono dati; non cessano però venuto meno il diritto di colui che li stabilisce, eccetto che non sia disposto espressamente il contrario." },
-  { num: 34, text: "§1. Le istruzioni, che propriamente rendono chiare le disposizioni delle leggi e sviluppano e determinano i procedimenti nell'eseguirle, sono date a uso di quelli il cui cómpito è curare che le leggi siano mandate ad esecuzione e li obbligano nell'esecuzione stessa delle leggi; le pubblicano legittimamente, entro i limiti della loro competenza, coloro che godono della potestà esecutiva.<br>§2. I dispositivi delle istruzioni non derogano alle leggi, e se qualcuno non può accordarsi con le disposizioni delle leggi, è privo di ogni vigore.<br>§3. Le istruzioni cessano di avere vigore non soltanto con la revoca esplicita o implicita dell'autorità competente, che le pubblicò, o del suo superiore, ma anche cessando la legge per chiarire o per mandare ad esecuzione la quale furono date." }
-];
-
+let allCanons = [];
 let currentFilter = { from: 1, to: 203 };
+let dataLoaded = false;
+
+async function loadBook(book = 1) {
+  if (dataLoaded) return;
+  const container = document.getElementById('canons');
+  container.innerHTML = '<div class="loading">Caricamento dei canoni...</div>';
+  try {
+    const res = await fetch(`data/libro${book}.json`);
+    if (!res.ok) throw new Error('File non trovato');
+    allCanons = await res.json();
+    dataLoaded = true;
+    renderCanons();
+  } catch (e) {
+    container.innerHTML = `<div class="loading">Errore nel caricamento dei dati.<br>Assicurati che il file data/libro${book}.json esista.</div>`;
+    console.error(e);
+  }
+}
 
 function renderCanons(filterText = "") {
   const container = document.getElementById('canons');
+  if (!dataLoaded) return;
   container.innerHTML = "";
   const f = filterText.toLowerCase().trim();
   allCanons.forEach(c => {
     if (c.num < currentFilter.from || c.num > currentFilter.to) return;
-    if (f && !c.num.toString().includes(f) && !c.text.toLowerCase().includes(f)) return;
+    if (f && !String(c.num).includes(f) && !c.text.toLowerCase().includes(f)) return;
     const card = document.createElement('div');
     card.className = 'canon-card';
     card.innerHTML = `
@@ -176,13 +136,17 @@ function renderCanons(filterText = "") {
     card.querySelector('.canon-header').onclick = () => card.classList.toggle('open');
     container.appendChild(card);
   });
+  if (container.children.length === 0) {
+    container.innerHTML = '<div class="loading">Nessun canone trovato in questo intervallo.</div>';
+  }
 }
 
 function showSection(from, to) {
   currentFilter = { from, to };
   showView('canons');
   document.getElementById('search').value = "";
-  renderCanons();
+  if (!dataLoaded) loadBook(1);
+  else renderCanons();
 }
 
 function showView(view) {
@@ -191,8 +155,18 @@ function showView(view) {
   document.getElementById('view-' + view).classList.add('active');
   const nav = document.querySelector(`[data-view="${view}"]`);
   if (nav) nav.classList.add('active');
-  if (view === 'canons') renderCanons();
+  if (view === 'canons' && !dataLoaded) loadBook(1);
+  if (view === 'canons' && dataLoaded) renderCanons();
 }
+
+// Кліки по титулах
+document.querySelectorAll('.title-item[data-from]').forEach(item => {
+  item.onclick = () => {
+    const from = parseInt(item.dataset.from);
+    const to = parseInt(item.dataset.to);
+    showSection(from, to);
+  };
+});
 
 document.querySelectorAll('.nav-item[data-view]').forEach(item => {
   item.onclick = () => {
@@ -209,8 +183,6 @@ document.getElementById('themeBtn').onclick = () => {
   html.setAttribute('data-theme', isDark ? '' : 'dark');
   document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
 };
-
-renderCanons();
 </script>
 </body>
 </html>
