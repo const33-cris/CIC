@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Кодекс Канонічного Права — Книга I, Титул I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f9f6f2;
+    --card: #ffffff;
+    --primary: #7c1d3a;
+    --primary-dark: #5a1429;
+    --gold: #c9a227;
+    --text: #2c1e16;
+    --muted: #7a6a5c;
+    --border: #eee6dc;
+    --nav-bg: #ffffff;
+  }
+  [data-theme="dark"] {
+    --bg: #1a1512;
+    --card: #26201c;
+    --primary: #c45c7a;
+    --primary-dark: #a84868;
+    --gold: #d4b44a;
+    --text: #f5efe8;
+    --muted: #b8a898;
+    --border: #3a322c;
+    --nav-bg: #221c18;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+    padding-bottom: 72px;
+    transition: background 0.3s, color 0.3s;
+  }
+  header {
+    background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 1.5rem 1rem 1.3rem;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+  .cross {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+    opacity: 0.9;
+  }
+  header h1 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    letter-spacing: -0.4px;
+  }
+  header .subtitle {
+    font-size: 0.82rem;
+    opacity: 0.85;
+    margin-top: 0.35rem;
+    font-weight: 400;
+  }
+  .search-box {
+    padding: 0.9rem 1rem;
+    background: var(--bg);
+    position: sticky;
+    top: 92px;
+    z-index: 90;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 0.95rem 1.1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 14px;
+    font-size: 1rem;
+    background: var(--card);
+    color: var(--text);
+    outline: none;
+  }
+  .search-box input:focus {
+    border-color: var(--primary);
+  }
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0.4rem 0.9rem 1rem;
+  }
+  .canon-card {
+    background: var(--card);
+    border-radius: 16px;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .canon-header {
+    padding: 1rem 1.15rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .canon-number {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.08rem;
+  }
+  .canon-title {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-top: 0.1rem;
+  }
+  .arrow {
+    color: var(--primary);
+    font-size: 1.1rem;
+    transition: transform 0.25s;
+  }
+  .canon-card.open .arrow { transform: rotate(180deg); }
+  .canon-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    font-size: 0.98rem;
+  }
+  .canon-card.open .canon-body {
+    max-height: 900px;
+    padding: 0 1.15rem 1.2rem;
+  }
+  .canon-body p { margin-bottom: 0.5rem; }
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--nav-bg);
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    padding: 0.55rem 0 0.7rem;
+    z-index: 200;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
+  }
+  .nav-item {
+    text-align: center;
+    font-size: 0.68rem;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0.2rem 0.5rem;
+  }
+  .nav-item.active { color: var(--primary); font-weight: 600; }
+  .nav-item span { display: block; font-size: 1.35rem; margin-bottom: 0.1rem; }
+  .theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  .note {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin: 1.5rem 1rem 0.5rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+  <div class="cross">✝</div>
+  <h1>Кодекс Канонічного Права</h1>
+  <div class="subtitle">Книга I. Загальні норми<br>Титул I. Церковні закони (кан. 7–22)</div>
+</header>
+
+<div class="search-box">
+  <input type="text" id="search" placeholder="Пошук канону (напр. 7, 8–10, 22)...">
+</div>
+
+<div class="container" id="canons"></div>
+
+<div class="note">
+  Офіційна італійська версія з vatican.va<br>
+  Латинський оригінал є єдиним автентичним текстом
+</div>
+
+<nav class="bottom-nav">
+  <div class="nav-item active"><span>📖</span>Зміст</div>
+  <div class="nav-item"><span>📜</span>Канони</div>
+  <div class="nav-item"><span>🔖</span>Закладки</div>
+  <div class="nav-item"><span>⚙️</span>Налаштування</div>
+</nav>
+
+<script>
+const canons = [
+  { num: 7, text: "La legge è istituita quando è promulgata." },
+  { num: 8, text: "§1. Le leggi ecclesiastiche universali sono promulgate con l'edizione nella <em>gazzetta ufficiale degli Acta Apostolicae Sedis</em>, a meno che in casi particolari non sia stato stabilito un modo diverso di promulgare; ed entrano in vigore soltanto compiuti tre mesi dal giorno apposto al numero degli <em>Acta</em>, a meno che non obblighino immediatamente per la natura delle cose oppure nella stessa legge sia stata stabilita in modo speciale ed espressamente una più breve o una più lunga vacanza.<br>§2. Le leggi particolari sono promulgate nel modo determinato dal legislatore e cominciano a obbligare dopo un mese dal giorno della promulgazione, a meno che nella stessa legge non sia stabilito un termine diverso." },
+  { num: 9, text: "Le leggi riguardano le cose future, non le cose passate, a meno che non si disponga nominatamente in esse delle cose passate." },
+  { num: 10, text: "Sono da ritenersi irritanti o inabilitanti solo quelle leggi con le quali si stabilisce espressamente che l'atto è nullo o la persona è inabile." },
+  { num: 11, text: "Alle leggi puramente ecclesiastiche sono tenuti i battezzati nella Chiesa cattolica o in essa accolti, e che godono di sufficiente uso di ragione e, a meno che non sia disposto espressamente altro dal diritto, hanno compiuto il settimo anno di età." },
+  { num: 12, text: "§1. Alle leggi universali sono tenuti dovunque tutti coloro per i quali sono state date.<br>§2. Dalle leggi universali invece, che non sono in vigore in un determinato territorio, sono esenti tutti quelli che si trovano attualmente in tale territorio.<br>§3. Alle leggi fatte per un territorio peculiare sono sottoposti coloro per i quali sono state date e che in esso hanno il domicilio o il quasi-domicilio e insieme attualmente vi dimorano, fermo restando il disposto del can. 13." },
+  { num: 13, text: "§1. Le leggi particolari non si presumono personali, ma territoriali, se non consta altrimenti.<br>§2. I forestieri non sono obbligati: 1) alle leggi particolari del loro territorio fino a quando ne sono assenti, a meno che o la loro trasgressione rechi danno nel proprio territorio, o le leggi siano personali; 2) e neppure alle leggi del territorio in cui si trovano, eccetto quelle che provvedono all'ordine pubblico, o determinano le formalità degli atti, o riguardano gli immobili situati nel territorio.<br>§3. I girovaghi sono obbligati alle leggi, sia universali sia particolari, che sono in vigore nel luogo in cui si trovano." },
+  { num: 14, text: "Le leggi, anche irritanti o inabilitanti, nel dubbio di diritto non urgono; nel dubbio di fatto invece gli Ordinari possono dispensare da esse, purché, se si tratta di dispensa riservata, venga solitamente concessa dall'autorità cui è riservata." },
+  { num: 15, text: "§1. L'ignoranza o l'errore circa le leggi irritanti e inabilitanti non impediscono l'effetto delle medesime, a meno che non sia stabilito espressamente altro.<br>§2. L'ignoranza o l'errore circa la legge o la pena oppure su un fatto personale o intorno a un fatto notorio di altri non si presumono; circa un fatto non notorio di altri si presumono, finché non si provi il contrario." },
+  { num: 16, text: "§1. Interpreta autenticamente le leggi il legislatore e colui al quale egli abbia concesso la potestà d'interpretarle autenticamente.<br>§2. L'interpretazione autentica presentata a modo di legge ha la medesima forza della legge stessa e deve essere promulgata; e se soltanto dichiara le parole di per sé certe della legge, ha valore retroattivo; se restringe o estende la legge oppure chiarisce quella dubbia, non è retroattiva.<br>§3. L'interpretazione invece a modo di sentenza giudiziale o di atto amministrativo in cosa peculiare, non ha forza di legge e obbliga soltanto le persone e dispone delle cose per cui è stata data." },
+  { num: 17, text: "Le leggi ecclesiastiche sono da intendersi secondo il significato proprio delle parole considerato nel testo e nel contesto; che se rimanessero dubbie e oscure, si deve ricorrere ai luoghi paralleli, se ce ne sono, al fine e alle circostanze della legge e all'intendimento del legislatore." },
+  { num: 18, text: "Le leggi che stabiliscono una pena, o che restringono il libero esercizio dei diritti, o che contengono un'eccezione alla legge, sono sottoposte a interpretazione stretta." },
+  { num: 19, text: "Se su una determinata materia manca una espressa disposizione di legge sia universale sia particolare o una consuetudine, la causa, se non è penale, è da dirimersi tenute presenti le leggi date per casi simili, i principi generali del diritto applicati con equità canonica, la giurisprudenza e la prassi della Curia Romana, il modo di sentire comune e costante dei giuristi." },
+  { num: 20, text: "La legge posteriore abroga la precedente o deroga alla medesima, se lo indica espressamente, o è direttamente contraria a quella, oppure riordina integralmente tutta quanta la materia della legge precedente; la legge universale però non deroga affatto al diritto particolare o speciale, a meno che non sia disposto espressamente altro dal diritto." },
+  { num: 21, text: "Nel dubbio la revoca della legge preesistente non si presume, ma le leggi posteriori devono essere ricondotte alle precedenti e con queste conciliate, per quanto è possibile." },
+  { num: 22, text: "Le leggi civili alle quali il diritto della Chiesa rimanda, vengano osservate nel diritto canonico con i medesimi effetti, in quanto non siano contrarie al diritto divino e se il diritto canonico non dispone altrimenti." }
+];
+
+const container = document.getElementById('canons');
+const searchInput = document.getElementById('search');
+const themeBtn = document.getElementById('themeBtn');
+
+function render(filter = "") {
+  container.innerHTML = "";
+  const f = filter.toLowerCase().trim();
+  canons.forEach(c => {
+    if (f && !c.num.toString().includes(f) && !c.text.toLowerCase().includes(f)) return;
+    const card = document.createElement('div');
+    card.className = 'canon-card';
+    card.innerHTML = `
+      <div class="canon-header">
+        <div>
+          <div class="canon-number">Кан. ${c.num}</div>
+          <div class="canon-title">Can. ${c.num}</div>
+        </div>
+        <div class="arrow">▼</div>
+      </div>
+      <div class="canon-body"><p>${c.text}</p></div>
+    `;
+    card.querySelector('.canon-header').onclick = () => card.classList.toggle('open');
+    container.appendChild(card);
+  });
+}
+
+searchInput.oninput = e => render(e.target.value);
+themeBtn.onclick = () => {
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? '' : 'dark');
+  themeBtn.textContent = isDark ? '🌙' : '☀️';
+  localStorage.setItem('theme', isDark ? 'light' : 'dark');
+};
+
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  themeBtn.textContent = '☀️';
+}
+
+render();
+</script>
+</body>
+</html>
