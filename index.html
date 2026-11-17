@@ -147,14 +147,20 @@ nav {
 nav button {
   background: none;
   border: none;
-  font-size: 11px;
-  color: #888;
+  font-size: 13px;
+  font-weight: 500;
+  color: #999;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
+  padding: 6px 0;
+  min-width: 70px;
 }
-nav button.active { color: var(--primary); }
+nav button.active {
+  color: var(--primary);
+  font-weight: 700;
+}
 #content { min-height: calc(100vh - 130px); }
 </style>
 </head>
@@ -202,14 +208,74 @@ async function loadData() {
 function showIndice() {
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.querySelector('nav button:nth-child(1)').classList.add('active');
-  document.getElementById('content').innerHTML = `
-    <div style="padding:20px;text-align:center;">
-      <h2 style="color:var(--primary);margin-bottom:20px;">Libro I — Norme generali</h2>
-      <div onclick="showSection(7,22,'Titolo I. Le leggi ecclesiastiche (7–22)')" style="padding:14px;background:white;margin:8px 0;border-radius:10px;cursor:pointer;">Titolo I. Le leggi ecclesiastiche (7–22)</div>
-      <div onclick="showSection(23,28,'Titolo II. La consuetudine (23–28)')" style="padding:14px;background:white;margin:8px 0;border-radius:10px;cursor:pointer;">Titolo II. La consuetudine (23–28)</div>
-      <!-- Додай інші титули за потреби -->
-    </div>
-  `;
+
+  const titles = {
+    it: {
+      book: "Libro I — Norme generali",
+      items: [
+        {from:1, to:6, title:"Canoni preliminari (1–6)"},
+        {from:7, to:22, title:"Titolo I. Le leggi ecclesiastiche (7–22)"},
+        {from:23, to:28, title:"Titolo II. La consuetudine (23–28)"},
+        {from:29, to:34, title:"Titolo III. I decreti generali e le istruzioni (29–34)"},
+        {from:35, to:93, title:"Titolo IV. Gli atti amministrativi singolari (35–93)"},
+        {from:94, to:95, title:"Titolo V. Gli statuti e i regolamenti (94–95)"},
+        {from:96, to:123, title:"Titolo VI. Le persone fisiche e giuridiche (96–123)"},
+        {from:124, to:128, title:"Titolo VII. Gli atti giuridici (124–128)"},
+        {from:129, to:144, title:"Titolo VIII. La potestà di governo (129–144)"},
+        {from:145, to:196, title:"Titolo IX. Gli uffici ecclesiastici (145–196)"},
+        {from:197, to:199, title:"Titolo X. La prescrizione (197–199)"},
+        {from:200, to:203, title:"Titolo XI. Il computo del tempo (200–203)"}
+      ]
+    },
+    la: {
+      book: "Liber I — De normis generalibus",
+      items: [
+        {from:1, to:6, title:"Canones praeliminares (1–6)"},
+        {from:7, to:22, title:"Titulus I. De legibus ecclesiasticis (7–22)"},
+        {from:23, to:28, title:"Titulus II. De consuetudine (23–28)"},
+        {from:29, to:34, title:"Titulus III. De decretis generalibus et instructionibus (29–34)"},
+        {from:35, to:93, title:"Titulus IV. De actibus administrativis singularibus (35–93)"},
+        {from:94, to:95, title:"Titulus V. De statutis et ordinibus (94–95)"},
+        {from:96, to:123, title:"Titulus VI. De personis physicis et iuridicis (96–123)"},
+        {from:124, to:128, title:"Titulus VII. De actibus iuridicis (124–128)"},
+        {from:129, to:144, title:"Titulus VIII. De potestate regiminis (129–144)"},
+        {from:145, to:196, title:"Titulus IX. De officiis ecclesiasticis (145–196)"},
+        {from:197, to:199, title:"Titulus X. De praescriptione (197–199)"},
+        {from:200, to:203, title:"Titulus XI. De temporis supputatione (200–203)"}
+      ]
+    },
+    uk: {
+      book: "Книга I — Загальні норми",
+      items: [
+        {from:1, to:6, title:"Попередні канони (1–6)"},
+        {from:7, to:22, title:"Титул I. Церковні закони (7–22)"},
+        {from:23, to:28, title:"Титул II. Звичай (23–28)"},
+        {from:29, to:34, title:"Титул III. Загальні декрети та інструкції (29–34)"},
+        {from:35, to:93, title:"Титул IV. Окремі адміністративні акти (35–93)"},
+        {from:94, to:95, title:"Титул V. Статути та порядки (94–95)"},
+        {from:96, to:123, title:"Титул VI. Фізичні та юридичні особи (96–123)"},
+        {from:124, to:128, title:"Титул VII. Юридичні акти (124–128)"},
+        {from:129, to:144, title:"Титул VIII. Влада управління (129–144)"},
+        {from:145, to:196, title:"Титул IX. Церковні посади (145–196)"},
+        {from:197, to:199, title:"Титул X. Давність (197–199)"},
+        {from:200, to:203, title:"Титул XI. Обчислення часу (200–203)"}
+      ]
+    }
+  };
+
+  const lang = titles[currentLang] || titles.it;
+  let html = `<div style="padding:20px;text-align:center;">
+    <h2 style="color:var(--primary);margin-bottom:20px;">${lang.book}</h2>`;
+
+  lang.items.forEach(item => {
+    html += `<div onclick="showSection(${item.from},${item.to},'${item.title}')" 
+              style="padding:14px;background:white;margin:8px 0;border-radius:10px;cursor:pointer;border:1px solid #eee;">
+              ${item.title}
+            </div>`;
+  });
+
+  html += `</div>`;
+  document.getElementById('content').innerHTML = html;
 }
 
 function showSection(from, to, title) {
